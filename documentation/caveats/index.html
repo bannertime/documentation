@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/996aa2639c8449de1a99.css" rel="stylesheet">
+      <link href="/224983d1b02bcf0cacfa.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -25,61 +25,66 @@
 <p><strong>Possible solutions</strong></p>
 <p><strong>1. Beautify the JS</strong></p>
 <p>In the javascript.js gulp task I used the following settings in the <code>uglify()</code> function.</p>
-<pre><code>uglify<span class="token punctuation">(</span><span class="token punctuation">{</span>
-  mangle: false,
-  output: <span class="token punctuation">{</span>beautify: true<span class="token punctuation">}</span>,
-  compress: <span class="token punctuation">{</span>
-    sequences: false,
-    unused: <span class="token boolean">false</span>
+<pre><code class="lang-js"><span class="token function">uglify</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  mangle<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>beautify<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  compress<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    sequences<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    unused<span class="token punctuation">:</span> <span class="token boolean">false</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre><p><strong>2. Declare it in the HTML</strong></p>
+</code></pre>
+<p><strong>2. Declare it in the HTML</strong></p>
 <p>To keep the uglified version of the code, you could also place a copy of the interactions in the HTML in an uncalled function.</p>
-<pre><code><span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">&quot;text/javascript&quot;</span><span class="token operator">&gt;</span>
-  Banner.prototype.sizmekEventLoader <span class="token operator">=</span> function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    EB.clickthrough<span class="token punctuation">(</span><span class="token string">&apos;interaction-name&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    EB.userActionCounter<span class="token punctuation">(</span><span class="token string">&apos;interaction-name&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token operator">&lt;</span>/script<span class="token operator">&gt;</span>
-</code></pre><p>This will allow the platform to pick up the interactions and register them against the creative so the metrics can be tracked in the platform.</p>
+<pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text/javascript<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  Banner.prototype.sizmekEventLoader = function() {
+    EB.clickthrough(&apos;interaction-name&apos;);
+    EB.userActionCounter(&apos;interaction-name&apos;);
+  };
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>This will allow the platform to pick up the interactions and register them against the creative so the metrics can be tracked in the platform.</p>
 <p>This method is also appropriate when using dynamic variables in a creative, such as:</p>
-<pre><code>var myVar <span class="token operator">=</span> <span class="token string">&apos;foo&apos;</span><span class="token punctuation">;</span>
-EB.clickthrough<span class="token punctuation">(</span>myVar<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><pre><code><span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">&quot;text/javascript&quot;</span><span class="token operator">&gt;</span>
-  Banner.prototype.sizmekEventLoader <span class="token operator">=</span> function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    EB.clickthrough<span class="token punctuation">(</span><span class="token string">&apos;foo&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token operator">&lt;</span>/script<span class="token operator">&gt;</span>
-</code></pre><h3 class="header"><a class="anchor" href="#webkit-overflow" id="webkit-overflow"></a><span class="text">Webkit overflow</span><a class="icon-link" href="#webkit-overflow"></a></h3>
+<pre><code class="lang-js"><span class="token keyword">var</span> myVar <span class="token operator">=</span> <span class="token string">&apos;foo&apos;</span><span class="token punctuation">;</span>
+EB<span class="token punctuation">.</span><span class="token function">clickthrough</span><span class="token punctuation">(</span>myVar<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text/javascript<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  Banner.prototype.sizmekEventLoader = function() {
+    EB.clickthrough(&apos;foo&apos;);
+  };
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<h3 class="header"><a class="anchor" href="#webkit-overflow" id="webkit-overflow"></a><span class="text">Webkit overflow</span><a class="icon-link" href="#webkit-overflow"></a></h3>
 <p>Recently a webkit bug was discovered which prevented border-radius from working as expected. The desired effect was to round the edges of a parent element which would mask the overflow of its child elements.</p>
 <p>The solution was to create a webkit mask as demonstarted in this example:</p>
-<pre><code>/**
+<pre><code class="lang-js"><span class="token comment">/**
  * Create dom elements.
- */
-Banner.prototype.createElements <span class="token operator">=</span> function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  this.container <span class="token operator">=</span> this.smartObject<span class="token punctuation">(</span><span class="token punctuation">{</span>
-    height: 100,
-    width: 100,
-    parent: this.banner,
-    overflow: <span class="token string">&apos;hidden&apos;</span>
+ */</span>
+Banner<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>createElements <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>container <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">smartObject</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    height<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+    width<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+    parent<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>banner<span class="token punctuation">,</span>
+    overflow<span class="token punctuation">:</span> <span class="token string">&apos;hidden&apos;</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    this.innerElement <span class="token operator">=</span> this.smartObject<span class="token punctuation">(</span><span class="token punctuation">{</span>
-      backgroundColor: <span class="token string">&apos;red&apos;</span>,
-      height: 100,
-      width: 100,
-      parent: this.container
+    <span class="token keyword">this</span><span class="token punctuation">.</span>innerElement <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">smartObject</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      backgroundColor<span class="token punctuation">:</span> <span class="token string">&apos;red&apos;</span><span class="token punctuation">,</span>
+      height<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+      width<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+      parent<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>container
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-/**
+<span class="token comment">/**
  * Setup initial element states.
- */
-Banner.prototype.setup <span class="token operator">=</span> function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  this.container.set<span class="token punctuation">(</span><span class="token punctuation">{</span>borderRadius: <span class="token string">&apos;20px&apos;</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  this.container.style.webkitMask <span class="token operator">=</span> <span class="token string">&apos;url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC)&apos;</span><span class="token punctuation">;</span>
+ */</span>
+Banner<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>setup <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>container<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token punctuation">{</span>borderRadius<span class="token punctuation">:</span> <span class="token string">&apos;20px&apos;</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>container<span class="token punctuation">.</span>style<span class="token punctuation">.</span>webkitMask <span class="token operator">=</span> <span class="token string">&apos;url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC)&apos;</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre><p>The webkit mask acts as a fallback for <code>border-radius</code> when rounding corners of an <code>overflow: hidden</code> element.</p>
+</code></pre>
+<p>The webkit mask acts as a fallback for <code>border-radius</code> when rounding corners of an <code>overflow: hidden</code> element.</p>
 <h3 class="header"><a class="anchor" href="#safari-centering" id="safari-centering"></a><span class="text">Safari <code>&lt;img&gt;</code> centering</span><a class="icon-link" href="#safari-centering"></a></h3>
 <p>The <code>center()</code>, <code>centerHorizontal()</code>, or <code>centerVertical()</code> methods is unable to correctly position a <code>smartObject()</code> in Safari due to the time it takes the browser to calculate the objects <code>offsetWidth</code> or <code>offsetHeight</code> properties which are used to calculate negative margins.</p>
 <p>This can be worked around by either explicitly setting <code>width</code> and <code>height</code> properties. Or simply call the methods after a short delay.</p>
