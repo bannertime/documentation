@@ -56,7 +56,6 @@ Now you can build your banner in the `banner.animation.js` file.
 
 </div>
 
-heroki
 # Issues
 
 If you think you have found an error in the generator, open an issue on [GitHub](https://github.com/bannertime/generator-bannertime/issues) or ask for help on [Slack](https://bannertime.herokuapp.com/).
